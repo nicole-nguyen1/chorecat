@@ -1,8 +1,8 @@
 ## Team Roles
 
-Product Owner: Jeff
-Scrum Master: Mason
-Development Team: Nicole, Logan, Jeff, Mason
+- Product Owner: Jeff
+- Scrum Master: Mason
+- Development Team: Nicole, Logan, Jeff, Mason
 
 ## Welcome to GitHub Pages
 
