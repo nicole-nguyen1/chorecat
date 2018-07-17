@@ -28,7 +28,7 @@ const deleteChore = (chore_id) =>
 
 const editChore = (chore_id, newChore) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE chores SET ? WHERE id= ?`, [{name: newChore}, {id: chore_id}], (err, results) => {
+    connection.query(`UPDATE chores SET ? WHERE id = ?`, [{name: newChore}, chore_id], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -49,7 +49,7 @@ const deleteUser = (user_id) =>
 
 const editUser = (user_id, newUser) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE users SET ? WHERE name = ?`, [{name: newUser}, {id: user_id}], (err, results) => {
+    connection.query(`UPDATE users SET ? WHERE id = ?`, [{name: newUser}, user_id], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
