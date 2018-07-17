@@ -1,0 +1,28 @@
+{
+  "name": "chorecat",
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/meloncats/chorecat/edit/master/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meloncats/chorecat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meloncats/chorecat/issues"
+  },
+  "homepage": "https://github.com/meloncats/chorecat#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "node": "^10.6.0",
+    "nodemon": "^1.18.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
