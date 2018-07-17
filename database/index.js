@@ -19,16 +19,16 @@ const addChore = (chore) =>
     });
   })
 
-const deleteChore = (chore) =>
+const deleteChore = (chore_id) =>
   new Promise((resolve, reject) => {
-    connection.query(`DELETE FROM chores WHERE ?`, {name: chore}, (err, results) => {
+    connection.query(`DELETE FROM chores WHERE ?`, {id: chore_id}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
 
-const editChore = (oldChore, newChore) =>
+const editChore = (chore_id, newChore) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE chores SET ? WHERE name= ?`, [{name: newChore}, {name: oldChore}], (err, results) => {
+    connection.query(`UPDATE chores SET ? WHERE id= ?`, [{name: newChore}, {id: chore_id}], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -40,16 +40,16 @@ const addUser = (user) =>
     })
   })
 
-const deleteUser = (user) =>
+const deleteUser = (user_id) =>
   new Promise((resolve, reject) => {
-    connection.query(`DELETE FROM users WHERE ?`, {name: user}, (err, results) => {
+    connection.query(`DELETE FROM users WHERE ?`, {id: user_id}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
 
-const editUser = (user) =>
+const editUser = (user_id, newUser) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE users SET ? WHERE name = ?`, [{name: newUser}, {name: oldUser}], (err, results) => {
+    connection.query(`UPDATE users SET ? WHERE name = ?`, [{name: newUser}, {id: user_id}], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
