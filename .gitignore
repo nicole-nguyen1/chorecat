@@ -63,3 +63,4 @@ typings/
 .DS_Store
 .env
 client/dist/bundle.js
+.eslintrc.json
