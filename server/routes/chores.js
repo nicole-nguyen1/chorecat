@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:choreId', (req, res) => {
-  db.editChore(req.params.choreId, req.body)
+  db.editChore(req.params.choreId, req.body.name)
   .then(res.send(`PUT choreId ${req.params.choreId} success!`))
   .catch((err) => {
     console.error(`[error] put chore ${req.parmas.choreId}: ${err}`);
@@ -40,7 +40,7 @@ router.delete('/:choreId', (req, res) => {
   .catch((err) => {
     console.error(`[error] delete chore ${req.body.name}: ${err}`);
   });
-  
+
 });
 
 module.exports = router;

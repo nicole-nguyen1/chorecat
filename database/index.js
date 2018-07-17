@@ -49,14 +49,14 @@ const deleteUser = (user_id) =>
 
 const editUser = (user_id, newUser) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE users SET ? WHERE id = ?`, [{name: newUser}, user_id], (err, results) => {
+    connection.query(`UPDATE users SET ? WHERE id = ?`, [{name: newUser}, user_], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
 
 const completeChore = (user, chore, day) =>
   new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO completedChores (user_id, chore_id, day) VALUES ((SELECT ID from users WHERE name= ?), (SELECT ID from chores WHERE name= ?), ?)`, [user, chore, day], (err, results) => {
+    connection.query(`INSERT INTO completedChores (user_id, chore_id, day) VALUES ((SELECT ID from users WHERE id= ?), (SELECT ID from chores WHERE id= ?), ?)`, [user, chore, day], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })

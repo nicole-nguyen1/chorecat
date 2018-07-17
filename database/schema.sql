@@ -8,7 +8,7 @@ CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL UNIQUE,
   symbol VARCHAR(500),
-  household int NOT NULL,
+  household VARCHAR(50),
   PRIMARY KEY (ID)
 );
 
