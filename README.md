@@ -1,3 +1,9 @@
+## Team Roles
+
+- Product Owner: Jeff
+- Scrum Master: Mason
+- Development Team: Nicole, Logan, Jeff, Mason
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/meloncats/chorecat/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
