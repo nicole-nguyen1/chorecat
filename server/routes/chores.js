@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   db.findAll('chores')
   .then((queryResult) => res.send(queryResult))
   .catch((err) => {
-    console.error(`Error while adding chore ${req.body.name}: ${err}`);
+    console.error(`[error] get chores: ${err}`);
   });
 });
 
@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
   db.addChore(req.body.name)
   .then((newChoreId) => res.json({'choreId': newChoreId}))
   .catch((err) => {
-    console.error(`Error while adding chore ${req.body.name}: ${err}`);
+    console.error(`[error] post chore ${req.body.name}: ${err}`);
   });
 });
 
@@ -28,7 +28,7 @@ router.put('/:choreId', (req, res) => {
   db.editChore(req.params.choreId, req.body)
   .then(res.send(`PUT choreId ${req.params.choreId} success!`))
   .catch((err) => {
-    console.error(`Error while PUTing chore ${req.parmas.choreId}: ${err}`);
+    console.error(`[error] put chore ${req.parmas.choreId}: ${err}`);
   });
 });
 
@@ -36,7 +36,7 @@ router.delete('/:choreId', (req, res) => {
   db.deleteChore(req.params.choreId)
   .then(res.send(`DELETED choreId ${req.params.choreId} success!`))
   .catch((err) => {
-    console.error(`Error while adding chore ${req.body.name}: ${err}`);
+    console.error(`[error] delete chore ${req.body.name}: ${err}`);
   });
   
 });
