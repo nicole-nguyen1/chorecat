@@ -10,11 +10,16 @@ router.get('/', (req, res) => {
     .catch(err => console.error(`[error] GET calendar ${err}`));
 });
 
+// Using UTC day of week
 router.post('/', (req, res) => {
   const { choreId, userId, day } = req.body;
-  completeChore(userId, choreId, day)
-    .then(res.status(201).send())
-    .catch(err => console.error(`[error] POST calendar ${err}`));
+  if (day < 0 || day > 6) {
+    res.status(400).send('[error] expecting key:value pair for key "day" to have a "value" 0 - 6');
+  } else {
+    completeChore(userId, choreId, day)
+      .then(res.status(201).send())
+      .catch(err => console.error(`[error] POST calendar ${err}`));
+  }
 });
 
 module.exports = router;
