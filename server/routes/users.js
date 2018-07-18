@@ -1,31 +1,31 @@
 const express = require('express');
+const { addUser, editUser, deleteUser } = require('../../database/');
+const fetchAllUsersFromDB = require('../../database/').findAll;
 
 const router = express.Router();
 
-// const db = require('../../database/');
-
-const mockDataNote = '\n\nNote: JSON.stringify is being called on the data sent back to you.';
-
-// Only need this while we are using mock data
-const { mockUsers } = require('../mock-data/mock-data.js');
-
 router.get('/', (req, res) => {
-  // Run get all users DB helper method as a promise, then res.send
-  res.json(mockUsers);
+  fetchAllUsersFromDB('users')
+    .then(rows => res.status(200).json(rows))
+    .catch(err => console.error(`[error] GET users ${err}`));
 });
 
 router.post('/', (req, res) => {
-  // Run create user DB helper method as a promise, then res.send
-  res.send(`POST to /users with the following body: ${JSON.stringify(req.body)}${mockDataNote}`);
+  addUser(req.body.name)
+    .then(success => res.status(201).json({ newUserId: success.insertId }))
+    .catch(err => console.error(`[error] POST users ${err}`));
 });
 
 router.put('/:userId', (req, res) => {
-  // Run create chore DB helper method as a promise, then res.send
-  res.send(`PUT to /users with the following body: ${JSON.stringify(req.params)}${mockDataNote}`);
+  editUser(req.params.userId, req.body.name)
+    .then(res.status(200).send())
+    .catch(err => console.error(`[error] PUT user ${req.params.userId} --> ${err}`));
 });
 
 router.delete('/:userId', (req, res) => {
-  res.send(`DELETE /users with the following IDs: ${JSON.stringify(req.params)}${mockDataNote}`);
+  deleteUser(req.params.userId)
+    .then(res.status(200).send())
+    .catch(err => console.error(`[error] DELETE user ${req.params.userId} --> ${err}`));
 });
 
 module.exports = router;

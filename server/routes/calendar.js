@@ -1,16 +1,26 @@
 const express = require('express');
+const { completeChore } = require('../../database');
+const fetchAllCompletedChores = require('../../database').findAll;
 
 const router = express.Router();
 const db = require('../../database')
 
 router.get('/', (req, res) => {
-  // Run get all users DB helper method as a promise, then res.send
-  res.json('GET to /calendar... Mock calendar data goes here...');
+  fetchAllCompletedChores('completedChores')
+    .then(rows => res.status(200).json(rows))
+    .catch(err => console.error(`[error] GET calendar ${err}`));
 });
 
+// Using UTC day of week
 router.post('/', (req, res) => {
-  // Run get all users DB helper method as a promise, then res.send
-  res.json('POST to /calendar... Mock calendar data goes here...');
+  const { choreId, userId, day } = req.body;
+  if (day < 0 || day > 6) {
+    res.status(400).send('[error] expecting key:value pair for key "day" to have a "value" 0 - 6');
+  } else {
+    completeChore(userId, choreId, day)
+      .then(res.status(201).send())
+      .catch(err => console.error(`[error] POST calendar ${err}`));
+  }
 });
 
 module.exports = router;
