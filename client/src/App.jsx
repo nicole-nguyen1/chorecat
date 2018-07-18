@@ -18,10 +18,19 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchAllChores();
+    this.fetchAllUsers();
   }
 
   fetchAllUsers() {
-
+    axios.get('/users')
+      .then((res) => {
+        this.setState({
+          users: res.data
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   fetchAllChores() {
