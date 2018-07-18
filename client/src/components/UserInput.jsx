@@ -52,7 +52,7 @@ class UserInput extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Add chore</DialogTitle>
+          <DialogTitle id="form-dialog-title">Add user</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Please enter a new user:
@@ -61,7 +61,7 @@ class UserInput extends React.Component {
               autoFocus
               margin="dense"
               id="chore"
-              label="New Chore"
+              label="New User"
               type="text"
               fullWidth
               inputRef={(elm) => {
