@@ -1,11 +1,11 @@
 const express = require('express');
 const { completeChore } = require('../../database');
-const fetchAllCompletedChores = require('../../database').findAll('completedChores');
+const fetchAllCompletedChores = require('../../database').findAll;
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  fetchAllCompletedChores()
+  fetchAllCompletedChores('completedChores')
     .then(rows => res.status(200).json(rows))
     .catch(err => console.error(`[error] GET calendar ${err}`));
 });
