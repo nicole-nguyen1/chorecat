@@ -1,10 +1,13 @@
 const express = require('express');
+
 const router = express.Router();
+
+// const db = require('../../database/');
 
 const mockDataNote = '\n\nNote: JSON.stringify is being called on the data sent back to you.';
 
 // Only need this while we are using mock data
-const mockUsers = require('../mock-data/mock-data.js').mockUsers;
+const { mockUsers } = require('../mock-data/mock-data.js');
 
 router.get('/', (req, res) => {
   // Run get all users DB helper method as a promise, then res.send
