@@ -33,7 +33,7 @@ class Calendar extends React.Component {
           </TableHead>
           <TableBody>
             {this.props.chores.map( chore => {
-              return <ChoreRow key={chore.id} chore={chore}/>
+              return <ChoreRow key={chore.id} chore={chore} users={this.props.users}/>
             })}
           </TableBody>
         </Table>
