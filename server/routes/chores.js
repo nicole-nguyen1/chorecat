@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   db.addChore(req.body.name)
     .then((dbResponse) => {
-      res.json({ choreId: dbResponse.insertId });
+      res.status(201).json({ choreId: dbResponse.insertId });
     })
     .catch((err) => {
       console.error(`[error] post chore ${req.body.name}: ${err}`);
