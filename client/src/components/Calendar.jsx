@@ -4,6 +4,7 @@ import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -30,7 +31,11 @@ class Calendar extends React.Component {
               <TableCell>Saturday</TableCell>
             </TableRow>
           </TableHead>
-          <ChoreRow />
+          <TableBody>
+            {this.props.chores.map( chore => {
+              return <ChoreRow key={chore.id} chore={chore}/>
+            })}
+          </TableBody>
         </Table>
       </div>
     )
