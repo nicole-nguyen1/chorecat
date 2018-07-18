@@ -3,6 +3,7 @@ const { completeChore } = require('../../database');
 const fetchAllCompletedChores = require('../../database').findAll;
 
 const router = express.Router();
+const db = require('../../database')
 
 router.get('/', (req, res) => {
   fetchAllCompletedChores('completedChores')
