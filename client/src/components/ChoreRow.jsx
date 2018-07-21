@@ -1,18 +1,15 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import ChoreCell from './ChoreCell.jsx';
 
-const ChoreRow = props => (
-    <TableRow>
-      <TableCell>{props.chore.name}</TableCell>
-      <TableCell>Jeff did it today</TableCell>
-      <TableCell></TableCell>
-      <TableCell>Logan did it</TableCell>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
-      <TableCell>Nicole did it</TableCell>
-    </TableRow>
+const ChoreRow = (props) => (
+  <TableRow>
+    <TableCell>{props.chore.name}</TableCell>
+    {[0, 1, 2, 3, 4, 5, 6].map(dayId =>
+      <ChoreCell key={dayId} day={dayId} chore={props.chore} users={props.users}/>
+    )}
+  </TableRow>
 )
 
 export default ChoreRow;

@@ -1,16 +1,16 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: '127.0.0.1',
   user: 'root',
-  password: 'newpassword',
-  // socketPath: '/var/run/mysqld/mysqld.sock',
+  password: 'password',
+  //port: '/var/run/mysqld/mysqld.sock',
   // insecureauth: true,
   database: 'chorecat'
 });
 
 connection.connect(function(err) {
-  if (err) { throw err } else { console.log('connected') }
+  if (err) { throw err } else { console.log('connected to MySQL') }
 });
 
 const addChore = (chore) =>
