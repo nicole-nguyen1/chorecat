@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) { throw err } else { console.log('connected') }
+  if (err) { throw err } else { console.log('connected to MySQL') }
 });
 
 const addChore = (chore) =>

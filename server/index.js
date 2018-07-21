@@ -22,5 +22,5 @@ app.all('/*', (req, res) => {
 
 // Start listening on PORT
 app.listen(port, () => {
-  // console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
