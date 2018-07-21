@@ -13,6 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import red from '@material-ui/core/colors/red';
 import Icon from '@material-ui/core/Icon';
+import axios from 'axios';
 
 class ChoreRow extends React.Component {
   constructor(props) {
@@ -43,8 +44,11 @@ class ChoreRow extends React.Component {
     this.setState({ selectedRoomie: event.target.value });
   };
 
-  handleClickOpen() {
-    this.setState({ open: true });
+  handleClickOpen(day) {
+    this.setState({ 
+      open: true,
+      dialogDay: day  
+    });
   };
 
   handleClose() {
@@ -52,27 +56,23 @@ class ChoreRow extends React.Component {
   };
 
   markAsComplete() {
-    console.log(this.props.chore.id);
-    console.log(this.state.selectedRoomie);
-    console.log(this.state.day);
-    // axios.post('/calendar', {
-    //   choreId: this.props.chore.id,
-    //   userId: this.state.selectedRoomie,
-    //   day: this.state.day 
-    // })
+    axios.post('/calendar', {
+      choreId: this.props.chore.id,
+      userId: this.state.selectedRoomie,
+      day: this.state.dialogDay 
+    });
   }
 
   render() {
     return (
       <TableRow>
         <TableCell>{this.props.chore.name}</TableCell>
-        {[0, 1, 2, 3, 4, 5, 6].map(day => {
-          this.setState({day: day});
-          return <TableCell key={day} day={day}>
+        {[0, 1, 2, 3, 4, 5, 6].map(day =>
+          <TableCell key={day} dayprop={day}>
             {/* <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
               {this.state.isMouseInside ? <Icon onClick={this.handleClickOpen}>add_circle</Icon> : null} */}
             <div>
-              <Icon onClick={this.handleClickOpen}>add_circle</Icon>
+              <Icon onClick={() => this.handleClickOpen(day)}>add_circle</Icon>
               <Dialog
                 disableBackdropClick
                 disableEscapeKeyDown
@@ -108,7 +108,6 @@ class ChoreRow extends React.Component {
               </Dialog>
             </div>
           </TableCell>
-        }
         )}
       </TableRow>
     )
