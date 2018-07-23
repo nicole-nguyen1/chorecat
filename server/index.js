@@ -27,10 +27,11 @@ app.use('/calendar', calendar); // Setup route
 
 passport.use(new Strategy(
   (username, password, cb) => {
-    findUser(username)
+    findUser('*', { name: username })
       .then((user) => {
-        if (user.password !== password) { return cb(null, false); }
-        return cb(null, user);
+        console.log(user[0]);
+        if (user[0].password !== password) { return cb(null, false); }
+        return cb(null, user[0]);
       })
       .catch((err) => {
         console.log(`[error] during verification promise ${err} `);
@@ -40,6 +41,16 @@ passport.use(new Strategy(
       });
   },
 ));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((userId, done) => {
+  findUser('id', { id: userId })
+    .then(user => done(null, user))
+    .catch(err => done(err, null));
+});
 
 app.post('/login',
   passport.authenticate('local', { failureRedirect: '/meow' }),
