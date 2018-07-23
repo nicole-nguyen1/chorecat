@@ -34,9 +34,9 @@ const editChore = (chore_id, newChore) =>
     })
   })
 
-const addUser = (user) =>
+const addUser = (user, password) =>
   new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO users SET ?`, {name: user}, (err, results) => {
+    connection.query(`INSERT INTO users SET ?`, {name: user, password: password}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
