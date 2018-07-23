@@ -7,7 +7,7 @@ USE chorecat;
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL UNIQUE,
-  password VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL,
   symbol VARCHAR(500),
   household VARCHAR(50),
   PRIMARY KEY (ID)
