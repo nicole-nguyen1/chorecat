@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) { throw err } else { console.log('connected') }
+  if (err) { throw err } else { console.log('connected to MySQL') }
 });
 
 const addChore = (chore) =>
@@ -68,6 +68,21 @@ const findAll = (table) =>
       if (err) { reject(err) } else { resolve(results) }
     })
   })
+
+const getAllCompletedChores = () =>
+  new Promise((resolve, reject) => {
+    connection.query(`SELECT users.name, chores.name, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
+      if (err) { reject(err) } else { resolve(results) }
+    })
+  })
+
+const findUser = (params, data) =>
+  new Promise((resolve, reject) => {
+    connection.query(`SELECT ?? FROM users WHERE ?`, [params, data], (err, results) => {
+      if (err) { reject(err) } else { resolve(results) }
+    })
+  })
+
 
 
 module.exports.addChore = addChore;
