@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  addUser(req.body.name)
+  addUser(req.body.name, req.body.pw)
     .then(success => res.status(201).json({ newUserId: success.insertId }))
     .catch(err => console.error(`[error] POST users ${err}`));
 });
