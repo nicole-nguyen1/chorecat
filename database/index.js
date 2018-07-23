@@ -93,6 +93,7 @@ module.exports.editUser = editUser;
 module.exports.deleteUser = deleteUser;
 module.exports.completeChore = completeChore;
 module.exports.findAll = findAll;
+module.exports.findUser = findUser;
 //Consider deleting a user and how that might affect list table
 //Have to consider how adding a chore, editing a chore, deleting a chore affects tables
 //Have to consider how adding a user, editing a user, deleting a user affects tables
