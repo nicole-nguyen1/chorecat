@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import Calendar from './components/Calendar.jsx';
 import ChoreInput from './components/ChoreInput.jsx';
 import UserInput from './components/UserInput.jsx';
@@ -57,4 +56,4 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('app'));
+export default App;
