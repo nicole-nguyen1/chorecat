@@ -21,8 +21,8 @@ export default class SignUp extends React.Component {
   handleSignUp() {
     const context = this;
     const userObj = {
-      name: this.username.value,
-      pw: this.password.value
+      username: this.username.value,
+      password: this.password.value
     }
     axios.post('/users', userObj)
       .then( res => {
@@ -44,13 +44,13 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Sign Up</Button>
+        <Button onClick={this.handleClickOpen}>Sign In</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
+          <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -79,7 +79,7 @@ export default class SignUp extends React.Component {
               Cancel
             </Button>
             <Button onClick={this.handleSignUp} color="primary">
-              Sign Up
+              Sign In
             </Button>
           </DialogActions>
         </Dialog>
