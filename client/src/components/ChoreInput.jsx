@@ -29,7 +29,7 @@ class ChoreInput extends React.Component {
   };
 
   submitNewChore() {
-    axios.post('/chores', {
+    axios.post('/api/chores', {
       name: this.choreInput.value
     })
     .then((res) => {

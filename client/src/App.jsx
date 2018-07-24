@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   fetchAllUsers() {
-    axios.get('/users')
+    axios.get('/api/users')
       .then((res) => {
         this.setState({
           users: res.data
@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   fetchAllChores() {
-    axios.get('/chores')
+    axios.get('/api/chores')
       .then((res) => {
         this.setState({
           chores: res.data

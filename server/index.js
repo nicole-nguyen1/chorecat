@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // path is used to join image file names with __dirname
@@ -8,24 +10,24 @@ const passport = require('passport');
 const { Strategy } = require('passport-local');
 const { findUser } = require('../database/');
 
-// const secret = process.env.AUTH_KEY;
+const breakfast = process.env.AUTH_KEY || 'nyannyan';
 
 // Routes
 const users = require('./routes/users');
 const chores = require('./routes/chores');
 const calendar = require('./routes/calendar');
 
-const port = process.env.PORT || 3000; // Grab env variable if present, otherwise use port 3000
+const port = process.env.PORT || 3000; // Grab env variable if present, no fallback
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 app.use(bodyParser.json()); // Expect body to always be JSON
-app.use(session({ secret: 'nyannyan', resave: false, saveUninitialized: false }));
+app.use(session({ secret: breakfast, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/users', users); // Setup route
-app.use('/chores', chores); // Setup route
-app.use('/calendar', calendar); // Setup route
+app.use('/api/users', users); // Setup route
+app.use('/api/chores', chores); // Setup route
+app.use('/api/calendar', calendar); // Setup route
 
 passport.use(new Strategy(
   (username, password, cb) => {
