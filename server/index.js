@@ -31,12 +31,15 @@ passport.use(new Strategy(
   (username, password, cb) => {
     findUser('*', { name: username })
       .then((user) => {
-        console.log(user[0]);
-        if (user[0].password !== password) { return cb(null, false); }
-        return cb(null, user[0]);
+        try {
+          if (user[0].password !== password) { return cb(null, false); }
+          return cb(null, user[0]);
+        } catch (err) {
+          throw new Error(`[error ID 11] Username probably does not exist in DB. Full error message from system is: ${err}`);
+        }
       })
       .catch((err) => {
-        console.log(`[error] during verification promise ${err} `);
+        console.log(`[error ID 12] during verification promise ${err} `);
         // (err, user) => {
         //   if (err) { return cb(err); }
         //   if (!user) { return cb(null, false); }
@@ -60,7 +63,8 @@ app.post('/login',
     res.send('Success!');
   });
 
-// Catch all routes (for all verbs) we aren't expecting and server a feline 404
+
+// Catch all routes (for all verbs) we aren't expecting and serve a feline 404
 app.all('/*', (req, res) => {
   const feline404 = path.join(__dirname, '../client/dist/images/feline404.svg');
   res.status(404).sendFile(feline404);
