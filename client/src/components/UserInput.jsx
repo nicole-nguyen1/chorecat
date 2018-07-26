@@ -29,7 +29,7 @@ class UserInput extends React.Component {
   };
 
   submitNewUser() {
-    axios.post('/users', {
+    axios.post('/api/users', {
       name: this.userInput.value
     })
     .then((res) => {
