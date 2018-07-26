@@ -65,6 +65,9 @@ app.post('/login',
     res.send('Success!');
   });
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+});
 
 // Catch all routes (for all verbs) we aren't expecting and serve a feline 404
 app.all('/*', (req, res) => {
