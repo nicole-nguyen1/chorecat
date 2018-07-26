@@ -1,9 +1,9 @@
 import React from 'react';
-import Calendar from './components/Calendar.jsx';
-import ChoreInput from './components/ChoreInput.jsx';
-import UserInput from './components/UserInput.jsx';
+import Calendar from './Calendar.jsx';
+import ChoreInput from './ChoreInput.jsx';
+import UserInput from './UserInput.jsx';
 import axios from 'axios';
-import PieChart from './components/Charts.jsx';
+import PieChart from './Charts.jsx';
 import * as d3 from 'd3';
 
 class App extends React.Component {
@@ -107,8 +107,4 @@ class App extends React.Component {
   }
 }
 
-<<<<<<< HEAD
 export default App;
-=======
-render(<App />, document.getElementById('app'));
->>>>>>> 6264b8b3491d12d65b6be9268d6b77ea83922539
