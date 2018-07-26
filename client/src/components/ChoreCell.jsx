@@ -54,17 +54,27 @@ class ChoreCell extends React.Component {
   };
 
   markAsComplete() {
-    axios.post('/calendar', {
+    axios.post('/api/calendar', {
       choreId: this.props.chore.id,
       userId: this.state.selectedRoomie,
       day: this.state.dialogDay 
     }).then(this.handleClose());
   }
 
+  findUserFromId(id) {
+    let result = '';
+    this.props.users.forEach( user => {
+      if (user.id === id) {
+        result = user.name;
+      }
+    });
+    return result;
+  }
+
   render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-          {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
+        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : this.findUserFromId(this.state.selectedRoomie)}
         <div>
           <Dialog
             disableBackdropClick
