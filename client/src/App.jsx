@@ -10,7 +10,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       chores: [],
-      users: []
+      users: [],
+      completedChores: [
+        {user: 'Jeff', chore: 'Sweeping', day: 1},
+        {user: 'Jeff', chore: 'Sweeping', day: 2},
+        {user: 'Jeff', chore: 'Take out the trash', day: 0},
+        {user: 'Mason', chore: 'Take out the trash', day: 3},
+        {user: 'Mason', chore: 'Sweeping', day: 3},
+        {user: 'Nicole', chore: 'Sweeping', day: 4},
+        {user: 'Jeff', chore: 'Take out the trash', day: 5},
+        {user: 'Mason', chore: 'Sweeping', day: 5},
+        {user: 'Logan', chore: 'Sweeping', day: 6}
+      ]
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
@@ -51,7 +62,7 @@ class App extends React.Component {
         <p>This is the App component</p>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
-        <Calendar chores={this.state.chores} users={this.state.users} />
+        <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} />
       </div>
     )
   }

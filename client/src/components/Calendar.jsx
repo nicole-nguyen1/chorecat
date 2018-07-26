@@ -14,6 +14,12 @@ class Calendar extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({
+      sortedChores: this.sortChores(this.props.completedChores)
+    });
+  }
+
   sortChores(chores) {
     let sortedChores = [];
     chores.forEach( chore => {
@@ -54,7 +60,13 @@ class Calendar extends React.Component {
           </TableHead>
           <TableBody>
             {this.props.chores.map(chore => {
-              return <ChoreRow key={chore.id} chore={chore} users={this.props.users}/>
+              let completedBy = [];
+              this.state.sortedChores.forEach( sortedChore => {
+                if (sortedChore.name === chore.name) {
+                  completedBy = sortedChore.completedBy;
+                }
+              });
+              return <ChoreRow key={chore.id} chore={chore} users={this.props.users} completedBy={completedBy} />
             })}
           </TableBody>
         </Table>
