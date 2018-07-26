@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // path is used to join image file names with __dirname
-
+const d3 = require('d3')
 // Used for auth
 const session = require('express-session');
 const passport = require('passport');
