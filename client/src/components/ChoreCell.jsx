@@ -54,7 +54,7 @@ class ChoreCell extends React.Component {
   };
 
   markAsComplete() {
-    axios.post('/calendar', {
+    axios.post('/api/calendar', {
       choreId: this.props.chore.id,
       userId: this.state.selectedRoomie,
       day: this.state.dialogDay 
