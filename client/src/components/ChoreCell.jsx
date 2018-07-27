@@ -40,7 +40,7 @@ class ChoreCell extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ selectedRoomie: this.findUserFromId(event.target.value) });
+    this.setState({ selectedRoomie: event.target.value });
   };
 
   handleClickOpen(day) {
@@ -75,7 +75,7 @@ class ChoreCell extends React.Component {
   render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : this.state.selectedRoomie}
+        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : this.findUserFromId(this.state.selectedRoomie)}
         <div>
           <Dialog
             disableBackdropClick
