@@ -6,7 +6,15 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   fetchAllUsersFromDB('users')
-    .then(rows => res.status(200).json(rows))
+    .then((userObjects) => {
+      const users = userObjects.map((user) => {
+        const cleanUser = {};
+        Object.assign(cleanUser, user);
+        delete cleanUser.password;
+        return cleanUser;
+      });
+      res.status(200).json(users);
+    })
     .catch(err => console.error(`[error ID 41] GET users ${err}`));
 });
 
