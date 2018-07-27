@@ -20,7 +20,7 @@ export default class SignIn extends React.Component {
       username: this.username.value,
       password: this.password.value
     }
-    axios.post('api/users', userObj)
+    axios.post('api/login', userObj)
       .then( res => {
         context.handleClose();
       })

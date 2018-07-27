@@ -59,7 +59,7 @@ passport.deserializeUser((userId, done) => {
     .catch(err => done(err, null));
 });
 
-app.post('/login',
+app.post('/api/login',
   passport.authenticate('local', { failureRedirect: '/meow' }),
   (req, res) => {
     res.send('Success!');
