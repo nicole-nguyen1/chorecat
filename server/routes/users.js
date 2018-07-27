@@ -1,4 +1,7 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+
+const saltRounds = 10;
 const { addUser, editUser, deleteUser } = require('../../database/');
 const fetchAllUsersFromDB = require('../../database/').findAll;
 
@@ -6,13 +9,22 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   fetchAllUsersFromDB('users')
-    .then(rows => res.status(200).json(rows))
+    .then((userObjects) => {
+      const users = userObjects.map((user) => {
+        const cleanUser = {};
+        Object.assign(cleanUser, user);
+        delete cleanUser.password;
+        return cleanUser;
+      });
+      res.status(200).json(users);
+    })
     .catch(err => console.error(`[error ID 41] GET users ${err}`));
 });
 
 router.post('/', (req, res) => {
-  addUser(req.body.name, req.body.pw)
-    .then(success => res.status(201).json({ newUserId: success.insertId }))
+  bcrypt.hash(req.body.pw, saltRounds)
+    .then(hashedPW => addUser(req.body.name, hashedPW))
+    .then(newUserObject => res.status(201).json({ newUserId: newUserObject.insertId }))
     .catch(err => console.error(`[error ID 42] POST users ${err}`));
 });
 
