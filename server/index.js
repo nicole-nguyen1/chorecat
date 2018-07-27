@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // path is used to join image file names with __dirname
-const d3 = require('d3')
+const bcrypt = require('bcrypt');
 // Used for auth
 const session = require('express-session');
 const passport = require('passport');
@@ -32,10 +32,15 @@ app.use('/api/calendar', calendar); // Setup route
 passport.use(new Strategy(
   (username, password, cb) => {
     findUser('*', { name: username })
-      .then((user) => {
+      .then((userObject) => {
         try {
-          if (user[0].password !== password) { return cb(null, false); }
-          return cb(null, user[0]);
+          bcrypt.compare(password, userObject[0].password)
+            .then((passwordMatch) => {
+              if (passwordMatch) {
+                return cb(null, userObject[0]);
+              }
+              return cb(null, false);
+            });
         } catch (err) {
           throw new Error(`[error ID 11] Username probably does not exist in DB. Full error message from system is: ${err}`);
         }
@@ -59,8 +64,8 @@ passport.deserializeUser((userId, done) => {
     .catch(err => done(err, null));
 });
 
-app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/meow' }),
+app.post('/api/login',
+  passport.authenticate('local'),
   (req, res) => {
     res.send('Success!');
   });
