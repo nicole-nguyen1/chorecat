@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import App from './components/App.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
@@ -22,15 +22,17 @@ class Index extends React.Component{
 
           <hr />
 
-          <Route exact path="/app" render={props => (
-            <App />
-          )} />
-          <Route path="/login" render={() => (
-            <SignIn />
-          )} />
-          <Route path="/register" render={() => (
-            <SignUp />
-          )} />
+          <Switch>
+            <Route path="/login" render={() => (
+              <SignIn />
+            )} />
+            <Route path="/register" render={() => (
+              <SignUp />
+            )} />
+            <Route path="/app" render={props => (
+              <App />
+            )} />
+          </Switch>
         </div>
       </Router>
     )

@@ -65,7 +65,6 @@ app.post('/login',
     res.send('Success!');
   });
 
-// LOGAN - please fix
 // app.get('/*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 // });
