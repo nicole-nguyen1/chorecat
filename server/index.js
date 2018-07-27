@@ -10,14 +10,14 @@ const passport = require('passport');
 const { Strategy } = require('passport-local');
 const { findUser } = require('../database/');
 
-const breakfast = process.env.AUTH_KEY;
+const breakfast = process.env.AUTH_KEY || 'nyannyan';
 
 // Routes
 const users = require('./routes/users');
 const chores = require('./routes/chores');
 const calendar = require('./routes/calendar');
 
-const port = process.env.PORT; // Grab env variable if present, no fallback
+const port = process.env.PORT || 3000; // Grab env variable if present, no fallback
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist/')));
@@ -65,14 +65,14 @@ passport.deserializeUser((userId, done) => {
 });
 
 app.post('/api/login',
-  passport.authenticate('local'),
+  passport.authenticate('local', { failureRedirect: '/meow' }),
   (req, res) => {
     res.send('Success!');
   });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+// });
 
 // Catch all routes (for all verbs) we aren't expecting and serve a feline 404
 app.all('/*', (req, res) => {

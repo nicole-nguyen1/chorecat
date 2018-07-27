@@ -1,13 +1,11 @@
 import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
-export default class SignUp extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +22,7 @@ export default class SignUp extends React.Component {
       name: this.username.value,
       pw: this.password.value
     }
-    axios.post('/users', userObj)
+    axios.post('api/users', userObj)
       .then( res => {
         context.handleClose();
       })
@@ -44,14 +42,8 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Sign Up</Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
-          <DialogContent>
+        <Card>
+          <CardContent>
             <TextField
               autoFocus
               margin="dense"
@@ -73,17 +65,14 @@ export default class SignUp extends React.Component {
                 this.password = elm;
               }}
             />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
             <Button onClick={this.handleSignUp} color="primary">
               Sign Up
             </Button>
-          </DialogActions>
-        </Dialog>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 }
+
+export default SignUp;
