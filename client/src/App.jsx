@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   fetchAllCompletedChores() {
-    axios.get('/completedChores')
+    axios.get('/api/calendar')
       .then((res) => {
         this.setState({
           completedChores: res.data
