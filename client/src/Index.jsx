@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import App from './components/App.jsx';
+import ButtonAppBar from './components/ButtonAppBar.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
+
 
 class Index extends React.Component{
   constructor(props) {
@@ -14,14 +16,7 @@ class Index extends React.Component{
     return (
       <Router>
         <div>
-          <ul>
-            <li><Link to="/app">App</Link></li>
-            <li><Link to="/login">Sign In</Link></li>
-            <li><Link to="/register">Sign Up</Link></li>
-          </ul>
-
-          <hr />
-
+          <ButtonAppBar />
           <Switch>
             <Route path="/login" render={() => (
               <SignIn />
