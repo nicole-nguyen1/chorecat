@@ -24,7 +24,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   bcrypt.hash(req.body.pw, saltRounds)
     .then(hashedPW => addUser(req.body.name, hashedPW))
-    .then(newUserObject => res.status(201).json({ newUserId: newUserObject.insertId }))
+    .then((newUserObject) => {
+      newUserObject.id = newUserObject.insertId;
+      req.login(newUserObject, (err) => {
+        if (err) { throw new Error(err); }
+        return res.status(201).json({ newUserId: newUserObject.insertId });
+      });
+    })
     .catch(err => console.error(`[error ID 42] POST users ${err}`));
 });
 
