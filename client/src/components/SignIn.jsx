@@ -27,6 +27,7 @@ export default class SignIn extends React.Component {
       .then( res => {
         //redirects user to app
         context.props.router.history.push("/app");
+        
       })
       .catch( err => {
         console.error(err);

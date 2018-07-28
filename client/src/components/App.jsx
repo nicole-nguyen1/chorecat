@@ -94,7 +94,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>This is the App component</p>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
         {/* <PieChart x={200} y={200} outerRadius={150} innerRadius={50} cornerRadius={5}

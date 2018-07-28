@@ -44,7 +44,6 @@ class Calendar extends React.Component {
   render() {
     return (
       <div>
-        <p>This is the calendar component</p>
         <Table>
           <TableHead>
             <TableRow>

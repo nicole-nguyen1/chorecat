@@ -68,7 +68,12 @@ app.post('/api/login',
   passport.authenticate('local', { failureRedirect: '/meow' }),
   (req, res) => {
     res.send('Success!');
-  });
+});
+
+app.get('/api/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 // app.get('/*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
