@@ -13,18 +13,7 @@ class App extends React.Component {
     this.state = {
       chores: [],
       users: [],
-      completedChores: [
-                        {user: 'Jeff', chore: 'Sweeping', day: 2},
-                        {user: 'Nicole', chore: 'Sweeping', day: 4},
-                        {user: 'Nicole', chore: 'Sweeping', day: 5},
-                        {user: 'Mason', chore: 'Sweeping', day: 5},
-                        {user: 'Jeff', chore: 'Sweeping', day: 1},
-                        {user: 'Logan', chore: 'Sweeping', day: 4},
-                        {user: 'Logan', chore: 'Sweeping', day: 6},
-                        {user: 'Mason', chore: 'Sweeping', day: 3},
-                        {user: 'Logan', chore: 'Sweeping', day: 6},
-                        {user: 'Nicole', chore: 'Sweeping', day: 2}
-                      ],
+      completedChores: [],
       choresPerUser: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
@@ -36,7 +25,8 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchAllChores();
     this.fetchAllUsers();
-    this.formatChoresPerUser();
+    this.fetchAllCompletedChores();
+    this.render();
   }
 
   fetchAllUsers() {
@@ -64,22 +54,27 @@ class App extends React.Component {
   }
 
   fetchAllCompletedChores() {
-    axios.get('/completedChores')
+    axios.get('/api/calendar')
       .then((res) => {
+        console.log('Grabbing completed chores!')
         this.setState({
           completedChores: res.data
         });
+        console.log(this.state.completedChores, '')
+          this.formatChoresPerUser();
       })
       .catch((err) => {
         console.error(err);
       });
+
+
   }
 
   formatChoresPerUser() {
     let chartData = {};
     let choresPerUser = [];
     this.state.completedChores.forEach((chore)=>{
-      let user = chore.user
+      let user = chore.name
       if(chartData[user]) {
         chartData[user]++
       } else {
