@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
@@ -39,32 +41,34 @@ export default class SignIn extends React.Component {
 
   render() {
     return (
-      <div>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="username"
-          label="Enter username:"
-          type="text"
-          fullWidth
-          inputRef={(elm) => {
-            this.username = elm;
-          }}
-        />
-        <TextField
-          margin="dense"
-          id="password"
-          label="Enter password:"
-          type="password"
-          fullWidth
-          inputRef={(elm) => {
-            this.password = elm;
-          }}
-        />
-        <Button onClick={this.handleSignIn} color="primary">
-          Sign In
-        </Button>
-      </div>
+        <Card>
+          <CardContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="username"
+              label="Enter username:"
+              type="text"
+              fullWidth
+              inputRef={(elm) => {
+                this.username = elm;
+              }}
+            />
+            <TextField
+              margin="dense"
+              id="password"
+              label="Enter password:"
+              type="password"
+              fullWidth
+              inputRef={(elm) => {
+                this.password = elm;
+              }}
+            />
+            <Button onClick={this.handleSignIn} color="primary">
+              Sign In
+            </Button>
+          </CardContent>
+        </Card>
     );
   }
 }
