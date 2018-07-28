@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: 'password',
+  password: '',
   //port: '/var/run/mysqld/mysqld.sock',
   // insecureauth: true,
   database: 'chorecat'
@@ -15,7 +15,7 @@ connection.connect(function(err) {
 
 const addChore = (chore) =>
   new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO chores SET ?`, {name: chore}, (err, results) => {
+    connection.query(`INSERT INTO chores SET ?`, {chore: chore}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     });
   })
@@ -29,7 +29,7 @@ const deleteChore = (chore_id) =>
 
 const editChore = (chore_id, newChore) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE chores SET ? WHERE ?`, [{name: newChore}, {id: chore_id}], (err, results) => {
+    connection.query(`UPDATE chores SET ? WHERE ?`, [{chore: newChore}, {id: chore_id}], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -71,7 +71,7 @@ const findAll = (table) =>
 
 const getAllCompletedChores = () =>
   new Promise((resolve, reject) => {
-    connection.query(`SELECT users.name, chores.name, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
+    connection.query(`SELECT users.name, chores.chore, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -94,6 +94,7 @@ module.exports.deleteUser = deleteUser;
 module.exports.completeChore = completeChore;
 module.exports.findAll = findAll;
 module.exports.findUser = findUser;
+module.exports.getAllCompletedChores = getAllCompletedChores;
 //Consider deleting a user and how that might affect list table
 //Have to consider how adding a chore, editing a chore, deleting a chore affects tables
 //Have to consider how adding a user, editing a user, deleting a user affects tables

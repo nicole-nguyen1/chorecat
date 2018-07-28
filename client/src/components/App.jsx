@@ -12,17 +12,8 @@ class App extends React.Component {
     this.state = {
       chores: [],
       users: [],
-      completedChores: [
-        {user: 'Jeff', chore: 'Sweeping', day: 1},
-        {user: 'Jeff', chore: 'Sweeping', day: 2},
-        {user: 'Jeff', chore: 'Take out the trash', day: 0},
-        {user: 'Mason', chore: 'Take out the trash', day: 3},
-        {user: 'Mason', chore: 'Sweeping', day: 3},
-        {user: 'Nicole', chore: 'Sweeping', day: 4},
-        {user: 'Jeff', chore: 'Take out the trash', day: 5},
-        {user: 'Mason', chore: 'Sweeping', day: 5},
-        {user: 'Logan', chore: 'Sweeping', day: 6}
-      ]
+      completedChores: [],
+      choresPerUser: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
@@ -33,7 +24,7 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchAllChores();
     this.fetchAllUsers();
-    this.formatChoresPerUser();
+    this.fetchAllCompletedChores();
   }
 
   fetchAllUsers() {
@@ -66,6 +57,7 @@ class App extends React.Component {
         this.setState({
           completedChores: res.data
         });
+          this.formatChoresPerUser();
       })
       .catch((err) => {
         console.error(err);
@@ -76,7 +68,7 @@ class App extends React.Component {
     let chartData = {};
     let choresPerUser = [];
     this.state.completedChores.forEach((chore)=>{
-      let user = chore.user
+      let user = chore.name
       if(chartData[user]) {
         chartData[user]++
       } else {
