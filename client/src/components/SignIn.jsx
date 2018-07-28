@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import CardActions from '@material-ui/core/CardActions';
 
 export default class SignIn extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class SignIn extends React.Component {
 
   render() {
     return (
+      <div>
         <Card>
           <CardContent>
             <TextField
@@ -64,11 +66,14 @@ export default class SignIn extends React.Component {
                 this.password = elm;
               }}
             />
+          </CardContent>
+          <CardActions>
             <Button onClick={this.handleSignIn} color="primary">
               Sign In
             </Button>
-          </CardContent>
+          </CardActions>
         </Card>
+      </div>
     );
   }
 }

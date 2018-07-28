@@ -29,9 +29,7 @@ function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <Link to="/register">
-              <MenuIcon />
-            </Link>
+            <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
             <Link to="/app">
@@ -39,7 +37,10 @@ function ButtonAppBar(props) {
             </Link>
           </Typography>
           <Link to="/login">
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Sign In</Button>
+          </Link>
+          <Link to="/register">
+            <Button color="inherit">Sign Up</Button>
           </Link>
         </Toolbar>
       </AppBar>

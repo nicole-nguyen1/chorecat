@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
 import axios from 'axios';
 
 class SignUp extends React.Component {
@@ -64,10 +65,12 @@ class SignUp extends React.Component {
                 this.password = elm;
               }}
             />
+          </CardContent>
+          <CardActions>
             <Button onClick={this.handleSignUp} color="primary">
               Sign Up
             </Button>
-          </CardContent>
+          </CardActions>
         </Card>
     );
   }
