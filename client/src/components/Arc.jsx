@@ -8,11 +8,9 @@ class Arc extends React.Component {
   }
 
   render () {
-
     return (
     <path d={this.arc(this.props.data)}
       style={{fill: this.props.color}}
-
       ></path>
     )
   }
@@ -24,11 +22,7 @@ class LabeledArc extends Arc {
       this.arc.innerRadius(this.props.innerRadius);
       this.arc.outerRadius(this.props.outerRadius);
       this.arc.cornerRadius(this.props.cornerRadius);
-
-
     }
-
-
 
     render() {
         let [labelX, labelY] = this.arc.centroid(this.props.data),
