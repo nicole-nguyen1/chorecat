@@ -19,7 +19,7 @@ class ChoreCell extends React.Component {
     this.state = {
       open: false,
       isMouseInside: false,
-      selectedRoomie: '',
+      selectedRoomie: this.props.completedBy || '',
       day: ''
     }
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +28,7 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
+    this.findUserFromId = this.findUserFromId.bind(this);
   }
 
   mouseEnter() {
@@ -61,10 +62,20 @@ class ChoreCell extends React.Component {
     }).then(this.handleClose());
   }
 
+  findUserFromId(id) {
+    let result = '';
+    this.props.users.forEach( user => {
+      if (user.id === id) {
+        result = user.name;
+      }
+    });
+    return result;
+  }
+
   render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-          {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
+        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : this.findUserFromId(this.state.selectedRoomie)}
         <div>
           <Dialog
             disableBackdropClick
