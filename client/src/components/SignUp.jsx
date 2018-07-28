@@ -25,7 +25,8 @@ class SignUp extends React.Component {
     }
     axios.post('api/users', userObj)
       .then( res => {
-        context.handleClose();
+        //redirects user to app
+        context.props.router.history.push("/app");
       })
       .catch( err => {
         console.error(err);

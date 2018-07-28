@@ -18,11 +18,11 @@ class Index extends React.Component{
         <div>
           <ButtonAppBar />
           <Switch>
-            <Route path="/login" render={() => (
-              <SignIn />
+            <Route path="/login" render={props => (
+              <SignIn router={props}/>
             )} />
-            <Route path="/register" render={() => (
-              <SignUp />
+            <Route path="/register" render={props => (
+              <SignUp router={props}/>
             )} />
             <Route path="/app" render={props => (
               <App />
