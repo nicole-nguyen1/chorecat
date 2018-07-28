@@ -68,10 +68,12 @@ app.post('/api/login',
   passport.authenticate('local', { failureRedirect: '/meow' }),
   (req, res) => {
     res.send('Success!');
-});
+  });
 
 app.get('/api/logout', (req, res) => {
   req.logout();
+  res.clearCookie('connect.sid');
+  req.session.destroy();
   res.redirect('/');
 });
 
