@@ -42,7 +42,6 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
         <Card>
           <CardContent>
             <TextField
@@ -73,7 +72,6 @@ class SignUp extends React.Component {
             </Button>
           </CardActions>
         </Card>
-      </div>
     );
   }
 }

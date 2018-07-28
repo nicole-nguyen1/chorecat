@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 const styles = {
   root: {
     flexGrow: 1,
+    marginBottom: 20,
   },
   flex: {
     flexGrow: 1,
