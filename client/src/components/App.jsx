@@ -54,18 +54,14 @@ class App extends React.Component {
   fetchAllCompletedChores() {
     axios.get('/api/calendar')
       .then((res) => {
-        console.log('Grabbing completed chores!')
         this.setState({
           completedChores: res.data
         });
-        console.log(this.state.completedChores, '')
           this.formatChoresPerUser();
       })
       .catch((err) => {
         console.error(err);
       });
-
-
   }
 
   formatChoresPerUser() {
