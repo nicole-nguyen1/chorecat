@@ -48,13 +48,14 @@ class LabeledArc extends Arc {
 
     render() {
         let [labelX, labelY] = this.arc.centroid(this.props.data),
-            labelTranslate = `translate(${labelX} - 100, ${labelY} - 100)`;
+
+            labelTranslate = `translate(${labelX}, ${labelY})`;
 
 
         return (
             <g id={this.props.data.data.label}>
                 {super.render()}
-                <text font-famly="Roboto" className="info" transform={labelTranslate}
+                <text className="info" fontSize="1em"
                       textAnchor="middle" style={{opacity: this.state.opacity}}
                       >
                       <tspan x='0' dy='1em' y="-15">{this.props.data.data.label} completed </tspan>
