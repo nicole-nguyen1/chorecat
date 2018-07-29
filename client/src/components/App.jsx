@@ -25,6 +25,7 @@ class App extends React.Component {
     this.fetchAllChores();
     this.fetchAllUsers();
     this.fetchAllCompletedChores();
+    this.formatChoresPerUser();
   }
 
   fetchAllUsers() {
@@ -88,9 +89,9 @@ class App extends React.Component {
       <div>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
+        <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllCompletedChores={this.fetchAllCompletedChores}/>
         <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.choresPerUser} />
-        <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllChores={this.fetchAllCompletedChores} />
       </div>
     )
   }

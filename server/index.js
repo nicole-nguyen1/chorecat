@@ -31,7 +31,7 @@ app.use('/api/calendar', calendar); // Setup route
 
 passport.use(new Strategy(
   (username, password, cb) => {
-    findUser('*', { name: username })
+    findUser('*', { user_name: username })
       .then((userObject) => {
         try {
           bcrypt.compare(password, userObject[0].password)
@@ -77,9 +77,9 @@ app.get('/api/logout', (req, res) => {
   res.redirect('/');
 });
 
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
-// });
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+});
 
 // Catch all routes (for all verbs) we aren't expecting and serve a feline 404
 app.all('/*', (req, res) => {

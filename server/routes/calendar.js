@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   fetchAllCompletedChores()
-    .then(rows => {console.log(rows); return res.status(200).json(rows)})
+    .then(rows => res.status(200).json(rows))
     .catch(err => console.error(`[error ID 61] GET calendar ${err}`));
 });
 
