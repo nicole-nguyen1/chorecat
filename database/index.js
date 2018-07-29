@@ -15,7 +15,7 @@ connection.connect(function(err) {
 
 const addChore = (chore) =>
   new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO chores SET ?`, {chore: chore}, (err, results) => {
+    connection.query(`INSERT INTO chores SET ?`, {chore_name: chore}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     });
   })
@@ -29,14 +29,14 @@ const deleteChore = (chore_id) =>
 
 const editChore = (chore_id, newChore) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE chores SET ? WHERE ?`, [{chore: newChore}, {id: chore_id}], (err, results) => {
+    connection.query(`UPDATE chores SET ? WHERE ?`, [{chore_name: newChore}, {id: chore_id}], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
 
 const addUser = (user, password) =>
   new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO users SET ?`, {name: user, password: password}, (err, results) => {
+    connection.query(`INSERT INTO users SET ?`, {user_name: user, password: password}, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -50,7 +50,7 @@ const deleteUser = (user_id) =>
 
 const editUser = (user_id, newUser) =>
   new Promise((resolve, reject) => {
-    connection.query(`UPDATE users SET ? WHERE ?`, [{name: newUser}, {id: user_id}], (err, results) => {
+    connection.query(`UPDATE users SET ? WHERE ?`, [{user_name: newUser}, {id: user_id}], (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -71,7 +71,7 @@ const findAll = (table) =>
 
 const getAllCompletedChores = () =>
   new Promise((resolve, reject) => {
-    connection.query(`SELECT users.name, chores.chore, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
+    connection.query(`SELECT users.user_name, chores.chore_name, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -92,6 +92,7 @@ module.exports.addUser = addUser;
 module.exports.editUser = editUser;
 module.exports.deleteUser = deleteUser;
 module.exports.completeChore = completeChore;
+module.exports.getAllCompletedChores = getAllCompletedChores;
 module.exports.findAll = findAll;
 module.exports.findUser = findUser;
 module.exports.getAllCompletedChores = getAllCompletedChores;

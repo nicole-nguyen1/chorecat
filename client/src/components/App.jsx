@@ -27,6 +27,7 @@ class App extends React.Component {
     this.fetchAllChores();
     this.fetchAllUsers();
     this.fetchAllCompletedChores();
+    this.formatChoresPerUser();
   }
 
   fetchAllUsers() {

@@ -17,8 +17,8 @@ export default class SignIn extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
   }
   
-  handleSignIn() {
-    const context = this;
+  handleSignIn(e) {
+    // const context = this;
     const userObj = {
       username: this.username.value,
       password: this.password.value
@@ -26,8 +26,8 @@ export default class SignIn extends React.Component {
     axios.post('api/login', userObj)
       .then( res => {
         //redirects user to app
-        context.props.router.history.push("/app");
-        
+        this.props.router.history.push("/app");
+        this.props.onSignInSubmit(e);
       })
       .catch( err => {
         console.error(err);
@@ -70,7 +70,7 @@ export default class SignIn extends React.Component {
             />
           </CardContent>
           <CardActions>
-            <Button onClick={this.handleSignIn} color="primary">
+            <Button onClick={(e) => {this.handleSignIn(e)}} color="primary">
               Sign In
             </Button>
           </CardActions>

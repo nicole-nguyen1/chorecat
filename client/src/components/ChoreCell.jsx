@@ -28,7 +28,7 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
-    this.findUserFromId = this.findUserFromId.bind(this);
+    //this.findUserFromId = this.findUserFromId.bind(this);
   }
 
   mouseEnter() {
@@ -51,6 +51,7 @@ class ChoreCell extends React.Component {
   };
 
   handleClose() {
+    this.props.fetchComplete();
     this.setState({ open: false });
   };
 
@@ -59,23 +60,15 @@ class ChoreCell extends React.Component {
       choreId: this.props.chore.id,
       userId: this.state.selectedRoomie,
       day: this.state.dialogDay 
-    }).then(this.handleClose());
-  }
-
-  findUserFromId(id) {
-    let result = '';
-    this.props.users.forEach( user => {
-      if (user.id === id) {
-        result = user.name;
-      }
-    });
-    return result;
+    })
+      .then(this.handleClose());
   }
 
   render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : this.findUserFromId(this.state.selectedRoomie)}
+        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
+        {this.props.completedBy}
         <div>
           <Dialog
             disableBackdropClick
@@ -96,7 +89,7 @@ class ChoreCell extends React.Component {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    {this.props.users.map(user => <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>)}
+                    {this.props.users.map(user => <MenuItem key={user.id} value={user.id}>{user["user_name"]}</MenuItem>)}
                   </Select>
                 </FormControl>
               </form>

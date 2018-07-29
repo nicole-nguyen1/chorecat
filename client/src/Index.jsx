@@ -10,22 +10,35 @@ import SignUp from './components/SignUp.jsx';
 class Index extends React.Component{
   constructor(props) {
     super(props);
+    this.state = {
+      isLoggedIn: false
+    }
+    this.toggleLoginState = this.toggleLoginState.bind(this);
+    this.toggleLogoutState = this.toggleLogoutState.bind(this);
+  }
+
+  toggleLoginState(e) {
+    this.setState({isLoggedIn: true});
+  }
+
+  toggleLogoutState(e) {
+    this.setState({isLoggedIn: false});
   }
 
   render() {
     return (
       <Router>
         <div>
-          <ButtonAppBar />
+          <ButtonAppBar isLoggedIn={this.state.isLoggedIn} onLogoutClick={this.toggleLogoutState}/>
           <Switch>
             <Route path="/login" render={props => (
-              <SignIn router={props} />
+              <SignIn router={props} isLoggedIn={this.state.isLoggedIn} onSignInSubmit={this.toggleLoginState}/>
             )} />
             <Route path="/register" render={props => (
-              <SignUp router={props} />
+              <SignUp router={props} isLoggedIn={this.state.isLoggedIn} onSignUpSubmit={this.toggleLoginState}/>
             )} />
             <Route path="/logout" render={props => (
-              <SignIn />
+              <Redirect to="/login" />
             )} />
             <Route path="/app" render={props => (
               <App />
