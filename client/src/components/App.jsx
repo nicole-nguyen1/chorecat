@@ -12,7 +12,8 @@ class App extends React.Component {
     this.state = {
       chores: [],
       users: [],
-      completedChores: []
+      completedChores: [],
+      choresPerUser: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
@@ -57,6 +58,7 @@ class App extends React.Component {
         this.setState({
           completedChores: res.data
         });
+          this.formatChoresPerUser();
       })
       .catch((err) => {
         console.error(err);
@@ -67,7 +69,7 @@ class App extends React.Component {
     let chartData = {};
     let choresPerUser = [];
     this.state.completedChores.forEach((chore)=>{
-      let user = chore.user
+      let user = chore.name
       if(chartData[user]) {
         chartData[user]++
       } else {
@@ -87,9 +89,9 @@ class App extends React.Component {
       <div>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
-        {/* <PieChart x={200} y={200} outerRadius={150} innerRadius={50} cornerRadius={5}
-          data={this.state.choresPerUser} /> */}
         <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllCompletedChores={this.fetchAllCompletedChores}/>
+        <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.choresPerUser} />
       </div>
     )
   }

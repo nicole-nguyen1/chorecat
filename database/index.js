@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: 'password',
+  password: '',
   //port: '/var/run/mysqld/mysqld.sock',
   // insecureauth: true,
   database: 'chorecat'
@@ -95,6 +95,7 @@ module.exports.completeChore = completeChore;
 module.exports.getAllCompletedChores = getAllCompletedChores;
 module.exports.findAll = findAll;
 module.exports.findUser = findUser;
+module.exports.getAllCompletedChores = getAllCompletedChores;
 //Consider deleting a user and how that might affect list table
 //Have to consider how adding a chore, editing a chore, deleting a chore affects tables
 //Have to consider how adding a user, editing a user, deleting a user affects tables
