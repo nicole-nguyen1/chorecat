@@ -28,7 +28,6 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
-    //this.findUserFromId = this.findUserFromId.bind(this);
   }
 
   mouseEnter() {

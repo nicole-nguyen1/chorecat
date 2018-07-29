@@ -41,7 +41,9 @@ class Index extends React.Component{
               <Redirect to="/login" />
             )} />
             <Route path="/app" render={props => (
-              <App />
+              <div>
+              { this.state.isLoggedIn ? <App /> : <Redirect to="/login" /> }
+              </div>
             )} />
           </Switch>
         </div>
