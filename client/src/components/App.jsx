@@ -13,12 +13,14 @@ class App extends React.Component {
       chores: [],
       users: [],
       completedChores: [],
-      choresPerUser: []
+      choresPerUser: [],
+      ChoresByQuantity: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
     this.fetchAllCompletedChores = this.fetchAllCompletedChores.bind(this);
     this.formatChoresPerUser = this.formatChoresPerUser.bind(this);
+    this.formatChoresByQuantity = this.formatChoresByQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +60,7 @@ class App extends React.Component {
           completedChores: res.data
         });
           this.formatChoresPerUser();
+          this.formatChoresByQuantity();
       })
       .catch((err) => {
         console.error(err);
@@ -83,13 +86,34 @@ class App extends React.Component {
     })
   }
 
+  formatChoresByQuantity() {
+    let chartData = {};
+    let ChoresByQuantity = [];
+    this.state.completedChores.forEach((chore)=>{
+      let choreName = chore.chore
+      if(chartData[choreName]) {
+        chartData[choreName]++
+      } else {
+        chartData[choreName] = 1
+      }
+    });
+    for (var i in chartData){
+      ChoresByQuantity.push({value: chartData[i], label: i})
+    }
+    this.setState({
+      ChoresByQuantity: ChoresByQuantity
+    })
+  }
+
   render() {
     return (
       <div>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
-        <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.choresPerUser} />
+        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.choresPerUser} typeText={"chore"} />
+        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.ChoresByQuantity} typeText={"time"} />
         <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllChores={this.fetchAllCompletedChores} />
       </div>
     )
