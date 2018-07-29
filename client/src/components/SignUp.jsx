@@ -17,7 +17,7 @@ class SignUp extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this);
   }
   
-  handleSignUp() {
+  handleSignUp(e) {
     const context = this;
     const userObj = {
       name: this.username.value,
@@ -26,7 +26,8 @@ class SignUp extends React.Component {
     axios.post('api/users', userObj)
       .then( res => {
         //redirects user to sign in
-        context.props.router.history.push("/login");
+        context.props.router.history.push("/app");
+        this.props.onSignUpSubmit(e);
       })
       .catch( err => {
         console.error(err);
@@ -68,7 +69,7 @@ class SignUp extends React.Component {
             />
           </CardContent>
           <CardActions>
-            <Button onClick={this.handleSignUp} color="primary">
+          <Button onClick={(e) => { this.handleSignIn(e) }} color="primary">
               Sign Up
             </Button>
           </CardActions>

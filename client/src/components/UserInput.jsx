@@ -46,7 +46,7 @@ class UserInput extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Add user</Button>
+        <Button onClick={this.handleClickOpen}>Invite new roomie</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
