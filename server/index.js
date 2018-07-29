@@ -31,7 +31,7 @@ app.use('/api/calendar', calendar); // Setup route
 
 passport.use(new Strategy(
   (username, password, cb) => {
-    findUser('*', { name: username })
+    findUser('*', { user_name: username })
       .then((userObject) => {
         try {
           bcrypt.compare(password, userObject[0].password)

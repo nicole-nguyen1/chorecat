@@ -9,36 +9,6 @@ import TableBody from '@material-ui/core/TableBody';
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sortedChores: []
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      sortedChores: this.sortChores(this.props.completedChores)
-    });
-  }
-
-  sortChores(chores) {
-    let sortedChores = [];
-    chores.forEach( chore => {
-      //for each completed chore, loop through already sorted chores
-      let exists = false;
-      sortedChores.forEach( sorted => {
-        //check to see if sorted chore already exists
-        //if so, add tuple to sorted chore and set exists to true
-        if (sorted.name === chore.chore) {
-          sorted.completedBy.push([chore.user, chore.day]);
-          exists = true;
-        }
-      });
-      //if !exists, push new sorted chore to sortedChores with tuple
-      if (!exists) {
-        sortedChores.push({name: chore.chore, completedBy: [[chore.user, chore.day]]});
-      }
-    });
-    return sortedChores;
   }
 
   render() {
@@ -60,12 +30,12 @@ class Calendar extends React.Component {
           <TableBody>
             {this.props.chores.map(chore => {
               let completedBy = [];
-              this.state.sortedChores.forEach( sortedChore => {
-                if (sortedChore.name === chore.name) {
-                  completedBy = sortedChore.completedBy;
+              this.props.completedChores.forEach(completed => {
+                if (completed["chore_name"] === chore["chore_name"]) {
+                  completedBy.push([completed["user_name"], completed.day]);
                 }
               });
-              return <ChoreRow key={chore.id} chore={chore} users={this.props.users} completedBy={completedBy} />
+              return <ChoreRow key={chore.id} chore={chore} users={this.props.users} completedBy={completedBy} fetchAllComplete={this.props.fetchAllCompletedChores}/>
             })}
           </TableBody>
         </Table>

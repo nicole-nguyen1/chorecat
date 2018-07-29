@@ -38,7 +38,7 @@ class Index extends React.Component{
               <SignUp router={props} isLoggedIn={this.state.isLoggedIn} onSignUpSubmit={this.toggleLoginState}/>
             )} />
             <Route path="/logout" render={props => (
-              <SignIn />
+              <Redirect to="/login" />
             )} />
             <Route path="/app" render={props => (
               <App />
