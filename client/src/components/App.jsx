@@ -88,7 +88,7 @@ class App extends React.Component {
       <div>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
-        <PieChart x={200} y={200} outerRadius={175} innerRadius={75} cornerRadius={5}
+        <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.choresPerUser} />
         <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllChores={this.fetchAllCompletedChores} />
       </div>
