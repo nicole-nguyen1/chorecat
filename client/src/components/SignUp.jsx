@@ -69,7 +69,7 @@ class SignUp extends React.Component {
             />
           </CardContent>
           <CardActions>
-          <Button onClick={(e) => { this.handleSignIn(e) }} color="primary">
+          <Button onClick={(e) => { this.handleSignUp(e) }} color="primary">
               Sign Up
             </Button>
           </CardActions>

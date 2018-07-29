@@ -28,9 +28,6 @@ const styles = {
 class ButtonAppBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    }
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -46,9 +43,6 @@ class ButtonAppBar extends React.Component {
   handleSignOut(e) {
     axios.get('/api/logout')
       .then((res) => {
-        this.setState({
-          open: true
-        });
         this.props.onLogoutClick(e);
       })
       .catch((err) => {
@@ -74,30 +68,6 @@ class ButtonAppBar extends React.Component {
             {this.props.isLoggedIn ? (
               <Link to="/logout">
                 <Button color="inherit" onClick={(e) => {this.handleSignOut(e)}}>Sign Out</Button>
-                <Snackbar
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  open={this.state.open}
-                  autoHideDuration={6000}
-                  onClose={this.handleClose}
-                  ContentProps={{
-                    'aria-describedby': 'message-id',
-                  }}
-                  message={<span id="message-id">Successfully signed out!</span>}
-                  action={[
-                    <IconButton
-                      key="close"
-                      aria-label="Close"
-                      color="inherit"
-                      className={classes.close}
-                      onClick={this.handleClose}
-                    >
-                      <CloseIcon />
-                    </IconButton>,
-                  ]}
-                />
               </Link>
             ) : (
               <div>
