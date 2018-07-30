@@ -72,7 +72,7 @@ class App extends React.Component {
     let chartData = {};
     let choresPerUser = [];
     this.state.completedChores.forEach((chore)=>{
-      let user = chore.name
+      let user = chore.user_name
       if(chartData[user]) {
         chartData[user]++
       } else {
@@ -91,7 +91,7 @@ class App extends React.Component {
     let chartData = {};
     let ChoresByQuantity = [];
     this.state.completedChores.forEach((chore)=>{
-      let choreName = chore.chore
+      let choreName = chore.chore_name
       if(chartData[choreName]) {
         chartData[choreName]++
       } else {
