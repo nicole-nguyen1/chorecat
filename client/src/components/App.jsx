@@ -21,12 +21,14 @@ class App extends React.Component {
       chores: [],
       users: [],
       completedChores: [],
-      choresPerUser: []
+      choresPerUser: [],
+      ChoresByQuantity: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
     this.fetchAllCompletedChores = this.fetchAllCompletedChores.bind(this);
     this.formatChoresPerUser = this.formatChoresPerUser.bind(this);
+    this.formatChoresByQuantity = this.formatChoresByQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +69,7 @@ class App extends React.Component {
           completedChores: res.data
         });
           this.formatChoresPerUser();
+          this.formatChoresByQuantity();
       })
       .catch((err) => {
         console.error(err);
@@ -77,7 +80,7 @@ class App extends React.Component {
     let chartData = {};
     let choresPerUser = [];
     this.state.completedChores.forEach((chore)=>{
-      let user = chore.name
+      let user = chore.user_name
       if(chartData[user]) {
         chartData[user]++
       } else {
@@ -89,6 +92,25 @@ class App extends React.Component {
     }
     this.setState({
       choresPerUser: choresPerUser
+    })
+  }
+
+  formatChoresByQuantity() {
+    let chartData = {};
+    let ChoresByQuantity = [];
+    this.state.completedChores.forEach((chore)=>{
+      let choreName = chore.chore_name
+      if(chartData[choreName]) {
+        chartData[choreName]++
+      } else {
+        chartData[choreName] = 1
+      }
+    });
+    for (var i in chartData){
+      ChoresByQuantity.push({value: chartData[i], label: i})
+    }
+    this.setState({
+      ChoresByQuantity: ChoresByQuantity
     })
   }
 
@@ -106,8 +128,10 @@ class App extends React.Component {
           completedChores={this.state.completedChores} 
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
-        <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.choresPerUser} />
+        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.choresPerUser} typeText={"chore"} />
+        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.ChoresByQuantity} typeText={"time"} />
       </div>
     )
   }
