@@ -35,7 +35,13 @@ class Calendar extends React.Component {
                   completedBy.push([completed["user_name"], completed.day]);
                 }
               });
-              return <ChoreRow key={chore.id} chore={chore} users={this.props.users} completedBy={completedBy} fetchAllComplete={this.props.fetchAllCompletedChores}/>
+              return <ChoreRow 
+                key={chore.id} 
+                chore={chore} 
+                users={this.props.users} 
+                completedBy={completedBy} 
+                fetchAllChores={this.props.fetchAllChores} 
+                fetchAllComplete={this.props.fetchAllCompletedChores}/>
             })}
           </TableBody>
         </Table>
