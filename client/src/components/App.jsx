@@ -90,7 +90,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <UserInput fetchAllUsers={this.fetchAllUsers}/>
+        {/* <UserInput fetchAllUsers={this.fetchAllUsers}/> */}
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
         <CalendarReset fetchAllCompletedChores={this.fetchAllCompletedChores}/>
         <Calendar 
