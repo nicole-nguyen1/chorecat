@@ -7,7 +7,7 @@ class Arc extends React.Component {
     this.arc = d3.arc()
     this.state = {
       isMouseInside: false,
-      opacity: 0
+      opacity: 0,
     }
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
@@ -44,22 +44,25 @@ class LabeledArc extends Arc {
       this.arc.innerRadius(this.props.innerRadius);
       this.arc.outerRadius(this.props.outerRadius);
       this.arc.cornerRadius(this.props.cornerRadius);
+      if (this.props.data.data.value !== 1) {
+        this.typeText = this.props.type + "s"
+      } else {
+        this.typeText = this.props.type
+      }
     }
 
     render() {
-        let [labelX, labelY] = this.arc.centroid(this.props.data),
-
-            labelTranslate = `translate(${labelX}, ${labelY})`;
-
-
         return (
             <g id={this.props.data.data.label}>
                 {super.render()}
                 <text className="info" fontSize="1em"
-                      textAnchor="middle" style={{opacity: this.state.opacity}}
-                      >
-                      <tspan x='0' dy='1em' y="-15">{this.props.data.data.label} completed </tspan>
-       <tspan x='0' dy='1em'>{this.props.data.data.value} chores</tspan>
+                      textAnchor="middle" style={{
+                        opacity: this.state.opacity,
+                        fontStyle: "italic",
+                        fontColor: this.props.color
+                      }}>
+                      <tspan x='0' dy='1em' y="-15" style={{fontStyle: "bold"}}>{this.props.data.data.label}</tspan><tspan> completed</tspan>
+                      <tspan x='0' dy='1em'>({this.props.data.data.value}) {this.typeText}</tspan>
                 </text>
             </g>
         );
@@ -67,5 +70,3 @@ class LabeledArc extends Arc {
 }
 
 export default LabeledArc
-
-// export default Arc

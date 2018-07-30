@@ -13,17 +13,13 @@ class PieChart extends React.Component {
   arcGenerator(d, i) {
     return (
         <LabeledArc key={`arc-${i}`}
-          onClick={()=>console.log(this, i)}
           data={d}
           innerRadius={this.props.innerRadius}
           outerRadius={this.props.outerRadius}
           cornerRadius={this.props.cornerRadius}
+          type={this.props.typeText}
           color={this.colors(i)} />
     )
-  }
-
-  onHover(){
-    console.log('hovered!')
   }
 
   render () {
@@ -31,7 +27,7 @@ class PieChart extends React.Component {
       translate = `translate(${this.props.x}, ${this.props.y})`;
 
       return (
-        <svg width="700" height="450">
+        <svg width="450" height="450">
         <g transform={translate}>
           {pie.map((d, i)=> {return this.arcGenerator(d, i)})}
         </g>
