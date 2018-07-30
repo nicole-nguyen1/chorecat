@@ -18,7 +18,10 @@ class Index extends React.Component{
   }
 
   toggleLoginState(e) {
-    this.setState({isLoggedIn: true});
+    this.setState({isLoggedIn: true}, () => {
+      return (
+        <Redirect to="/app" />
+      )});
   }
 
   toggleLogoutState(e) {
@@ -41,9 +44,10 @@ class Index extends React.Component{
               <Redirect to="/login" />
             )} />
             <Route path="/app" render={props => (
-              <div>
-              { this.state.isLoggedIn ? <App /> : <Redirect to="/login" /> }
-              </div>
+              <App />
+              // <div>
+              // { this.state.isLoggedIn ? <App /> : <Redirect to="/login" /> }
+              // </div>
             )} />
           </Switch>
         </div>

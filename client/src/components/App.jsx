@@ -4,7 +4,10 @@ import ChoreInput from './ChoreInput.jsx';
 import UserInput from './UserInput.jsx';
 import axios from 'axios';
 import PieChart from './Charts.jsx';
+import Button from '@material-ui/core/Button';
 import * as d3 from 'd3';
+import CalendarReset from './CalendarReset.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -89,6 +92,7 @@ class App extends React.Component {
       <div>
         <UserInput fetchAllUsers={this.fetchAllUsers}/>
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
+        <CalendarReset fetchAllCompletedChores={this.fetchAllCompletedChores}/>
         <Calendar chores={this.state.chores} users={this.state.users} completedChores={this.state.completedChores} fetchAllCompletedChores={this.fetchAllCompletedChores}/>
         <PieChart x={200} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.choresPerUser} />
