@@ -50,12 +50,12 @@ npm run react-dev
 You may contribute by following the below steps:
 
 ### Git setup
-1. Fork from https://github.com/nicole-nguyen1/unlock-caps.git.
+1. Fork from https://github.com/nicole-nguyen1/chorecat.git.
 2. Clone from your repo.
 3. Add remote.
 
 ```
-git remote add upstream https://github.com/nicole-nguyen1/unlock-caps.git
+git remote add upstream https://github.com/nicole-nguyen1/chorecat.git
 ```
 
 ### Git workflow
