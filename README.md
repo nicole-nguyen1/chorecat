@@ -12,7 +12,7 @@ Team Members:
 ## Tech Stack
 Built with
 - Front-End: React, Material UI, D3
-- Back-End: Node, Express,
+- Back-End: Node, Express
 - Database: MySQL
 
 ## Features
